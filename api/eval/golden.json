@@ -1,0 +1,34 @@
+{
+  "retrieval": [
+    {"question": "How much refund do I get if I cancel 5 hours before my ride?", "expected": ["cancellations-refunds#s2-1"]},
+    {"question": "When will the refund show up in my bank?", "expected": ["cancellations-refunds#s2-2"]},
+    {"question": "What happens if I don't pick up the bike?", "expected": ["cancellations-refunds#s3-1"]},
+    {"question": "Is there a grace period for returning late?", "expected": ["late-returns-fees#s1"]},
+    {"question": "How is the late fee calculated for an e-bike?", "expected": ["late-returns-fees#s2-1"]},
+    {"question": "What ID do I need to show at pickup?", "expected": ["rental-terms#s1-2"]},
+    {"question": "Can I return the bike to a different station?", "expected": ["rental-terms#s3-2"]},
+    {"question": "How long is the bike held while I pay?", "expected": ["rental-terms#s2-4", "cancellations-refunds#s1-2"]},
+    {"question": "My e-bike display shows E02, what does it mean?", "expected": ["ebike-error-codes#s1-2"]},
+    {"question": "How far can the Volt go on one charge?", "expected": ["manual-volt-e#s3-1"]},
+    {"question": "How do I change gears on the Trail Hybrid?", "expected": ["manual-trail-hybrid#s2-1"]},
+    {"question": "The chain came off, how do I put it back?", "expected": ["repair-troubleshooting#s2-1"]},
+    {"question": "What should I do after an accident?", "expected": ["damage-accidents#s3-1"]},
+    {"question": "What do I pay if the bike is stolen?", "expected": ["damage-accidents#s4-1"]},
+    {"question": "Is my location tracked all the time?", "expected": ["privacy-tracking#s2-1"]},
+    {"question": "How long is the ride to Kanke Dam and which bike is best?", "expected": ["route-kanke-dam#s1"]},
+    {"question": "What are the opening hours at Ranchi Junction?", "expected": ["station-guide#s5"]},
+    {"question": "Is it safe to ride in the monsoon?", "expected": ["riding-in-ranchi#s3-1"]}
+  ],
+  "tool": [
+    {"question": "What bookings do I have coming up?", "expected": {"tool": "get_my_bookings"}},
+    {"question": "How much did I spend on rides each month this year?", "expected": {"tool": "get_spend_summary", "args": {"group_by": "month"}}},
+    {"question": "Which bike type have I spent the most on?", "expected": {"tool": "get_spend_summary", "args": {"group_by": "bike_type"}}},
+    {"question": "How many hours have I ridden in total?", "expected": {"tool": "get_ride_stats"}},
+    {"question": "Do I have any unpaid late fees?", "expected": {"tool": "get_fees_and_refunds"}},
+    {"question": "Is a Volt E-Bike free at Morabadi Ground tomorrow from 9 to 11?", "expected": {"tool": "check_availability", "args": {"station": "morabadi"}}},
+    {"question": "What does E10 mean on my e-bike?", "expected": {"tool": "search_docs"}},
+    {"question": "Which stations are open near Lalpur?", "expected": {"tool": "find_stations"}},
+    {"question": "How much is a Ridge MTB for 3 hours on Saturday morning?", "expected": {"tool": "get_price", "args": {"bike_type": "ridge"}}},
+    {"question": "If I cancel booking BK-ABC234 now, how much do I get back?", "expected": {"tool": "quote_cancellation", "args": {"booking_code": "BK-ABC234"}}}
+  ]
+}

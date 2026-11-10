@@ -1,0 +1,10 @@
+# On the VM: docker compose -f compose.yaml -f compose.prod.yaml up -d --build
+# Set SITE_ADDRESS to the domain in .env; Caddy then gets HTTPS certificates by itself.
+services:
+  db:
+    ports: !reset []
+  mailpit:
+    ports: !reset []
+    environment: {MP_WEBROOT: mail, MP_UI_AUTH: "${MAILPIT_UI_AUTH}"}  # user:password; every user is fake, so mail stays here
+  web:
+    ports: !override ["80:80", "443:443"]

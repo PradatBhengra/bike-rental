@@ -1,0 +1,43 @@
+[project]
+name = "bike-rental-api"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.32",
+  "pydantic>=2.9",
+  "pydantic-settings>=2.6",
+  "email-validator>=2.2",
+  "python-multipart>=0.0.12",
+  "psycopg[binary,pool]>=3.2",
+  "redis>=5.2",
+  "pyjwt>=2.10",
+  "bcrypt>=4.2",
+  "httpx>=0.28",
+  "openai>=1.55",
+  "fastembed>=0.5",
+  "boto3>=1.35",
+  "weasyprint>=63",
+  "tzdata",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3", "testcontainers[postgres,redis]>=4.8", "ruff>=0.8"]
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["B008", "E501"]  # long SQL strings read better unwrapped
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,22 @@
+{$SITE_ADDRESS::8080} {
+	encode gzip
+	handle /api/* {
+		reverse_proxy api:8000 {
+			flush_interval -1
+		}
+	}
+	handle /track/* {
+		reverse_proxy tracking:8001
+	}
+	handle /ws {
+		reverse_proxy tracking:8001
+	}
+	handle /mail* {
+		reverse_proxy mailpit:8025
+	}
+	handle {
+		root * /srv
+		try_files {path} /index.html
+		file_server
+	}
+}
