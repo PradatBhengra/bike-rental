@@ -52,3 +52,6 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+if settings.cookie_secure and ("change-me" in settings.jwt_secret or "dev-only" in settings.jwt_secret):
+    raise RuntimeError("Set JWT_SECRET to a long random value before running with COOKIE_SECURE=true.")
