@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # One-time Garage setup: give the single node its storage, import the app's key, create the bucket.
 set -euo pipefail
+export MSYS_NO_PATHCONV=1  # Git Bash on Windows would rewrite /garage into a Windows path
 cd "$(dirname "$0")/.."
 set -a; . ./.env; set +a
 g() { docker compose exec -T garage /garage "$@"; }

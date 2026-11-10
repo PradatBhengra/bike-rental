@@ -121,7 +121,7 @@ def run(conn, days: int = 120, customers: int = 24, seed: int = 7) -> dict:
         )
         for s in stations:
             for n in range(t["per_station"]):
-                code = f"{s['name'][:3].upper()}-{t['slug'][0].upper()}{n + 1:02d}"
+                code = f"{s['name'][:3].upper()}{s['id']}-{t['slug'][0].upper()}{n + 1:02d}"  # the id keeps Ranchi Lake and Ranchi Junction apart
                 conn.execute("INSERT INTO bike (code, bike_type_id, home_station_id) VALUES (%s, %s, %s)",
                              (code, type_id, s["id"]))
     conn.execute(
@@ -131,7 +131,7 @@ def run(conn, days: int = 120, customers: int = 24, seed: int = 7) -> dict:
 
     _user(conn, "admin@saalbikes.test", "Meera Admin", "admin")
     for s in stations:
-        _user(conn, f"staff.{s['name'].split()[0].lower()}@saalbikes.test", f"{s['name']} Desk", "staff", s["id"])
+        _user(conn, f"staff.{s['name'].lower().replace(' ', '-')}@saalbikes.test", f"{s['name']} Desk", "staff", s["id"])
     demo = _user(conn, "asha@example.com", "Asha Kumari", "customer")
     people = [demo] + [_user(conn, f"{n.split()[0].lower()}@example.com", n, "customer", consent=rng.random() < 0.7)
                        for n in NAMES[:customers]]
@@ -186,7 +186,7 @@ def main() -> None:
         counts = run(conn)
     db.close_pool()
     print(f"Seeded {counts}. Logins: admin@saalbikes.test / {PASSWORDS['admin']}, "
-          f"staff.morabadi@saalbikes.test / {PASSWORDS['staff']}, asha@example.com / {PASSWORDS['customer']}")
+          f"staff.morabadi-ground@saalbikes.test / {PASSWORDS['staff']}, asha@example.com / {PASSWORDS['customer']}")
 
 
 if __name__ == "__main__":

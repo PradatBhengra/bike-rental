@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Annotated, Literal
 
+import email_validator
 from fastapi import APIRouter, Cookie, Request, Response
 from pydantic import AfterValidator, BaseModel, EmailStr, Field
 
@@ -13,6 +14,8 @@ from app.errors import Problem
 from app.timeutil import utcnow
 
 router = APIRouter(tags=["auth"])
+# The demo staff use @saalbikes.test: .test can never receive real mail, but the validator refuses it by default.
+email_validator.SPECIAL_USE_DOMAIN_NAMES.remove("test")
 COOKIE = "refresh_token"
 
 

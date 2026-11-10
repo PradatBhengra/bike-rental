@@ -117,6 +117,7 @@ def main(folder: str) -> None:
     files = sorted(pathlib.Path(folder).glob("*.md"))
     with db.tx() as conn:
         changed = [p.name for p in files if load_file(conn, p)]
+    models.embedder(), models.reranker()  # downloads the models into the cache volume now
     print(f"{len(files)} documents, {len(changed)} new or changed: {', '.join(changed) or 'none'}")
     db.close_pool()
 
